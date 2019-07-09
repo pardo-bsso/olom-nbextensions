@@ -1,0 +1,20 @@
+include LICENSE.txt
+include README.md
+recursive-include nbolom *
+recursive-include nbolom/static *.js
+recursive-include nbolom/static *.css
+recursive-include jupyter-config *.json
+
+# Documentation
+graft docs
+exclude docs/\#*
+exclude docs/build
+
+# Examples
+graft examples
+
+# Patterns to exclude from any directory
+global-exclude *~
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude .git
