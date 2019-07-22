@@ -5,7 +5,7 @@ LONG_DESCRIPTION = open('README.md', 'rb').read().decode('utf-8')
 
 setup_args = dict(
     name='nbolom',
-    version='0.0.1',
+    version='0.0.2',
     maintainer='Adrián Pardini',
     maintainer_email='github@tangopardo.com.ar',
     packages=find_packages(),
@@ -32,6 +32,8 @@ setup_args = dict(
         ("share/jupyter/nbextensions/nbolom", [
             "nbolom/static/index.js",
             "nbolom/static/index.css",
+            "nbolom/static/highlight_rules.js",
+            "nbolom/static/highlights.css",
         ]),
         # like `jupyter nbextension enable --sys-prefix`
         ("etc/jupyter/nbconfig/notebook.d", [

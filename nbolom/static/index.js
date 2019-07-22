@@ -2,10 +2,18 @@ define([
     'require',
     'jquery',
     'base/js/namespace',
+    'base/js/events',
+    'notebook/js/codecell',
+    'codemirror/lib/codemirror',
+    './highlight_rules',
 ], function (
     requirejs,
     $,
     Jupyter,
+    events,
+    codecell,
+    CodeMirror,
+    highlight_rules
 ) {
     "use strict";
 
@@ -27,6 +35,40 @@ define([
                 href: requirejs.toUrl('./index.css')
             })
             .appendTo('head');
+        $('<link/>')
+            .attr({
+                rel: 'stylesheet',
+                type: 'text/css',
+                href: requirejs.toUrl('./highlights.css')
+            })
+            .appendTo('head');
+
+        CodeMirror.defineMode('olom-highlights', function () {
+          return {
+            token: function (stream, state) {
+              stream.eatSpace();
+              for (var rule of highlight_rules) {
+                if (stream.match(rule.regex)) {
+                  return rule.token;
+                }
+              }
+              stream.skipToEnd();
+              return null;
+            }
+          };
+        });
+
+        var add_cell_highlights = function(cell) {
+          if (!cell instanceof codecell.CodeCell) {
+            return;
+          }
+          cell.code_mirror.addOverlay('olom-highlights');
+        };
+
+        Jupyter.notebook.get_cells().forEach(add_cell_highlights);
+        events.on('create.Cell', function (evt, data) {
+          add_cell_highlights(data.cell);
+        });
     };
 
     // The specially-named function load_ipython_extension will be called

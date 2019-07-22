@@ -23,6 +23,17 @@ jupyter nbextension list
 ```
 
 
+## Custom words highlighting
+
+Edit the file nbolom/static/highlight_rules.js and nbolom/static/highlights.css to add custom syntax highlighting.
+You can use special rules (that should be in the CSS file) or standard CodeMirror token types (like, variable or atom
+for example).
+
+The styling is applied after all the built-in modes, so you might need to use *!important*
+
+The files define a simple rule to turn red all occurrences of the word *OLOMSAMPLE*
+
+
 ## Customization
 
 This package implements both a server side and a notebook extension.
