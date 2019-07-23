@@ -5,7 +5,7 @@ LONG_DESCRIPTION = open('README.md', 'rb').read().decode('utf-8')
 
 setup_args = dict(
     name='nbolom',
-    version='0.0.2',
+    version='0.0.3',
     maintainer='Adrián Pardini',
     maintainer_email='github@tangopardo.com.ar',
     packages=find_packages(),
