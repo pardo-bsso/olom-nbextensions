@@ -34,6 +34,7 @@ setup_args = dict(
             "nbolom/static/index.css",
             "nbolom/static/highlight_rules.js",
             "nbolom/static/highlights.css",
+            "nbolom/static/codemirror-elm.js",
         ]),
         # like `jupyter nbextension enable --sys-prefix`
         ("etc/jupyter/nbconfig/notebook.d", [

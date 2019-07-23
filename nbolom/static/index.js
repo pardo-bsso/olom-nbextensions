@@ -6,6 +6,7 @@ define([
     'notebook/js/codecell',
     'codemirror/lib/codemirror',
     './highlight_rules',
+    './codemirror-elm',
 ], function (
     requirejs,
     $,
@@ -13,7 +14,8 @@ define([
     events,
     codecell,
     CodeMirror,
-    highlight_rules
+    highlight_rules,
+    cm_elm_mode,
 ) {
     "use strict";
 
@@ -65,9 +67,36 @@ define([
           cell.code_mirror.addOverlay('olom-highlights');
         };
 
-        Jupyter.notebook.get_cells().forEach(add_cell_highlights);
-        events.on('create.Cell', function (evt, data) {
-          add_cell_highlights(data.cell);
+        var use_elm_mode = function(cell) {
+          if (!cell instanceof codecell.CodeCell) {
+            return;
+          }
+          var modeName = cell.code_mirror.getMode().name;
+
+          if (modeName === 'elm-python') {
+            return;
+          }
+
+          if (modeName.indexOf('python') == -1) {
+            return;
+          }
+
+          cell.code_mirror.setOption('mode', 'elm-python');
+        };
+
+        var update_cell_modes = function (cell) {
+          add_cell_highlights(cell);
+          use_elm_mode(cell);
+        };
+
+        Jupyter.notebook.get_cells().forEach(function(cell) {
+          update_cell_modes(cell);
+        });
+
+        ['create.Cell', 'select.Cell', 'edit_mode.Cell', 'command_mode.Cell'].forEach(function (eventName) {
+          events.on(eventName, function (evt, data) {
+            update_cell_modes(data.cell);
+          });
         });
     };
 

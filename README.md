@@ -33,6 +33,9 @@ The styling is applied after all the built-in modes, so you might need to use *!
 
 The files define a simple rule to turn red all occurrences of the word *OLOMSAMPLE*
 
+There is also a full fledged Python mode, *elm-python* that is applied to all Python cells. It can be modified from
+nbolom/static/codemirror-elm.js
+
 
 ## Customization
 
