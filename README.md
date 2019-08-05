@@ -29,12 +29,15 @@ Edit the file nbolom/static/highlight_rules.js and nbolom/static/highlights.css 
 You can use special rules (that should be in the CSS file) or standard CodeMirror token types (like, variable or atom
 for example).
 
-The styling is applied after all the built-in modes, so you might need to use *!important*
+The styling is applied after all the built-in modes, so you might need to use *!important* in the css rules.
 
 The files define a simple rule to turn red all occurrences of the word *OLOMSAMPLE*
 
 There is also a full fledged Python mode, *elm-python* that is applied to all Python cells. It can be modified from
 nbolom/static/codemirror-elm.js
+
+It allows you to define new keywords and identifiers in addition to the standard Python ones, just add a space delimited
+list of terms to *extra_keywords* and *extra_builtins*. See the comments inside codemirror-elm.js.
 
 
 ## Customization

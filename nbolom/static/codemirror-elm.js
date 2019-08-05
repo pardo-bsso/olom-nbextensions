@@ -21,6 +21,7 @@ function(CodeMirror) {
         pythonConf.name = 'ipython';
 
         // You can change the extra_keywords and extra_builtins properties to add new rules for code highlight
+        // Just add a list of words with a single space in between.
         pythonConf.extra_keywords = words("OLOM_SAMPLE_KEYWORD");
         pythonConf.extra_builtins = words("OLOM_SAMPLE_BUILT_IN");
 
